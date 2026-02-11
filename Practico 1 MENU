@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std; 
+
+int main()
+{
+    //declarar variable: 
+    int opcion; 
+    int a, b; 
+    do {
+        cout << "---MENU---" << endl;
+        cout << "1.opcion: suma de dos numeros" << endl;
+        cout << "2.opcion: ver si un numero es par o impar" << endl;
+        cout << "3.opcion: factorial" << endl;
+        cout << "0.salir" << endl;
+
+        cout << "INGRESE LA OPCION QUE DESEA REALIZAR: " << endl;
+        cin >> opcion;
+
+        switch (opcion)
+        {
+        case 1:
+            cout << "ingrese el primer valor: "; 
+            cin >> a;
+
+            cout << "ingrese el segundo valor: ";
+            cin >> b; 
+
+            cout << "la suma es: " << a + b;
+
+            break;
+
+        case 2:
+            cout << "ingrese un numero"; 
+            cin >> a;
+            if (a > 0)
+                cout << "el valor del numero es positivo";            
+            else 
+                cout << "el valor del numero es negativo"; 
+        
+            break; 
+                
+        case 3:
+            cout << "ingrese el valor que quiera calcular su factorial"; 
+            cin >> a; 
+            b = 1; 
+            for (int i = 2; i <= a; i++)
+                b = b*i; //b es un acumulador, i es un contador
+            cout << "el valor del factorial de: " << a << "es" << b << endl;
+
+                break;
+        case 0: 
+            cout << "salir"; 
+                    break; 
+        default:
+            cout << "Error" << endl; 
+        }
+
+    } while (opcion != 0);
+
+
+  
+}
