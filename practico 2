@@ -1,0 +1,74 @@
+// determinante4.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+//
+
+#include <iostream>
+using namespace std;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+//portotipo de funciones
+double discriminante(int a, int b, int c);
+
+double unica(int a, int b);
+double solucionreal(int a, int b, int c, double d, double& x2);
+double solucionimag(int a, int b, int c, double d, double& x2);
+
+int main (){
+	int a, b, c;
+	double x1, x2, d;
+
+	cout << "ingrese a: ";
+	cin >> a;
+
+	cout << "ingrese b: ";
+	cin >> b;
+
+	cout << "ingrese c: ";
+	cin >> c;
+
+	d = discriminante(a, b, c);//
+	if (d == 0) {
+		x1 = unica(a, b);
+		cout << "solucion unica: " << unica(b, a);
+	}
+	else
+		if (d > 0) {
+			x1 = solucionreal(a, b, c, d, x2);
+			cout << "las soluciones reales son" << endl;
+			cout << "x1= " << x1 << endl;
+			cout << "x2= " << x2 << endl;
+		}
+		else {
+			x1 = solucionimag(a, b, c, d, x2);
+			cout << "las soluciones imaginarias son " << endl;
+			cout << "x1=" << x1 << "+" << x2 << "i" << endl;
+			cout << "x2=" << x1 << "-" << x2 << "i" << endl;
+		}
+	return 0;
+}
+
+	//declaracion de funciones
+
+double discriminante(int a, int b, int c){
+		double r; 
+		r = (b * b) - 4 * a * c; 
+		return r; 
+}
+
+double unica(int a, int b) {
+		double u;
+		u = (b * -1) / (2 * a);
+		return u;
+}
+
+double solucionreal(int a, int b, int c, double d, double& x2) {
+		double x1 = (-b + sqrt(d)) / (2 * a);
+		x2=(-b - sqrt(d)) / (2 * a);
+		return x1; 
+
+}
+
+double solucionimag(int a, int b, int c, double d, double& x2) {
+		double x1 = (-b + sqrt(d)) / (2 * a); 
+		x2 = (-b - sqrt(d)) / (2 * a); 
+		return x1; 
+}
