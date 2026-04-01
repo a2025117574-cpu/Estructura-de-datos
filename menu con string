@@ -1,0 +1,90 @@
+// Menu.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+//
+
+#include <iostream>
+#include <string>
+using namespace std; 
+
+
+
+    string invertirFrase(string frase); 
+    string quitarVocal(string frase); 
+    void intercambiarPalabras(string &var1, string &var2); 
+
+
+
+void main()
+{
+    int opcion; 
+    string frase, var1, var2; 
+
+    cout << "---MENU---" << endl; 
+    cout << "1. Invertir Frase" << endl; 
+    cout << "2. Quitar Vocales" << endl; 
+    cout << "3. Intercambiar Palabras" << endl;
+    cout << "4. Sacar un substring" << endl; 
+    cout << "5. Contar vocales" << endl; 
+    cout << "6. Quitar Espacios" << endl; 
+    cout << "7. Envontrar caracteres" << endl; 
+    cout << "8. Longitud" << endl; 
+    cout << "9. comparar" << endl; 
+    cout << "0. salir" << endl; 
+
+    cout << "ingrese la opcion: "; 
+    cin >> opcion; 
+
+    switch (opcion) {
+    case 1:
+        cout << "ingrese la frase que desea invertir" << endl; 
+        getline(cin, frase); 
+        cout << "la frase invertida es "<< invertirFrase(frase); 
+        break;
+    case 2:
+        cout << "ingrese la frase que desea sin vocales: " << endl;
+        
+        break;
+    case 3:
+        cout << "ingrese la palabra: " << endl;
+        cin >> var1;
+        cout << "ingrese la palabra a intercambiar" << endl; 
+        cin >> var2; 
+        intercambiarPalabras(var1, var2);
+        cout << "La frase invertida es: "<<var1;
+        cout << "la segunda fras4e es" << var2; 
+
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+    case 6:
+        break;
+    case 7:
+        break;
+    case 8:
+        break;
+    case 9:
+        break;
+    case 0:
+        break;
+
+    default:
+        cout << "valor invalido";
+        break;
+    }
+
+    }
+
+string invertirFrase(string frase) {
+    for (int i = 0; i <= frase.length() / 2; i--);
+
+}
+
+string quitarVocal(string frase){
+    string aux = " ";
+    for (int i = 0; i < frase.length(); i++);
+
+    }
+void intercambiarPalabras(string& var1, string& var2) {
+    var2.swap(var1); 
+}
