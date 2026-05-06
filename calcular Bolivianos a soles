@@ -1,0 +1,141 @@
+import tkinter as tk
+from tkinter import messagebox
+
+def bolivianos_a_soles():
+    try:
+        bolivianos = float(entry_monto.get())
+        compra_usdt_bs = float(entry_compra_usdt_bs.get())
+        venta_usdt_soles = float(entry_venta_usdt_soles.get())
+        comision = float(entry_comision.get())
+
+        usdt = bolivianos / compra_usdt_bs
+        soles = usdt * venta_usdt_soles
+
+        # Aplicar comisión
+        soles_final = soles - (soles * comision / 100)
+
+        resultado.set(
+            f"Recibes:\n"
+            f"{usdt:.4f} USDT\n"
+            f"S/ {soles_final:.2f} (comisión aplicada)"
+        )
+
+    except ValueError:
+        messagebox.showerror("Error", "Ingrese solo números válidos.")
+
+
+def soles_a_bolivianos():
+    try:
+        soles = float(entry_monto.get())
+        compra_usdt_bs = float(entry_compra_usdt_bs.get())
+        venta_usdt_soles = float(entry_venta_usdt_soles.get())
+        comision = float(entry_comision.get())
+
+        # Ajustar por comisión (sumar antes de convertir)
+        soles_con_comision = soles + (soles * comision / 100)
+
+        usdt = soles_con_comision / venta_usdt_soles
+        bolivianos = usdt * compra_usdt_bs
+
+        resultado.set(
+            f"Necesitas:\n"
+            f"{usdt:.4f} USDT\n"
+            f"Bs {bolivianos:.2f} (incluye comisión)"
+        )
+
+    except ValueError:
+        messagebox.showerror("Error", "Ingrese solo números válidos.")
+
+
+# Ventana
+ventana = tk.Tk()
+ventana.title("Calculadora Pro Bs ⇄ USDT ⇄ Soles")
+ventana.geometry("450x480")
+ventana.config(bg="#1e1e2f")
+ventana.resizable(False, False)
+
+# Título
+tk.Label(
+    ventana,
+    text="💱 Calculadora de Cambio",
+    font=("Arial", 16, "bold"),
+    bg="#1e1e2f",
+    fg="white"
+).pack(pady=15)
+
+# Función para crear inputs estilizados
+def crear_input(texto):
+    tk.Label(
+        ventana,
+        text=texto,
+        font=("Arial", 10),
+        bg="#1e1e2f",
+        fg="white"
+    ).pack()
+
+    entry = tk.Entry(
+        ventana,
+        font=("Arial", 12),
+        justify="center",
+        bg="#2e2e3e",
+        fg="white",
+        insertbackground="white"
+    )
+    entry.pack(pady=5)
+    return entry
+
+# Inputs
+entry_monto = crear_input("Monto:")
+entry_compra_usdt_bs = crear_input("Compra USDT (Bs):")
+entry_venta_usdt_soles = crear_input("Venta USDT (S/):")
+entry_comision = crear_input("Comisión (%):")
+
+# Botones
+frame_botones = tk.Frame(ventana, bg="#1e1e2f")
+frame_botones.pack(pady=15)
+
+tk.Button(
+    frame_botones,
+    text="Bs ➜ Soles",
+    font=("Arial", 11, "bold"),
+    bg="#4CAF50",
+    fg="white",
+    activebackground="#45a049",
+    width=15,
+    command=bolivianos_a_soles
+).grid(row=0, column=0, padx=5)
+
+tk.Button(
+    frame_botones,
+    text="Soles ➜ Bs",
+    font=("Arial", 11, "bold"),
+    bg="#2196F3",
+    fg="white",
+    activebackground="#1976D2",
+    width=15,
+    command=soles_a_bolivianos
+).grid(row=0, column=1, padx=5)
+
+# Resultado
+resultado = tk.StringVar()
+resultado.set("Resultado aparecerá aquí")
+
+tk.Label(
+    ventana,
+    textvariable=resultado,
+    font=("Arial", 12, "bold"),
+    bg="#1e1e2f",
+    fg="#00ffcc",
+    justify="center"
+).pack(pady=20)
+
+# Nota
+tk.Label(
+    ventana,
+    text="Ingresa valores reales del mercado",
+    font=("Arial", 9),
+    bg="#1e1e2f",
+    fg="gray"
+).pack()
+
+ventana.mainloop()
