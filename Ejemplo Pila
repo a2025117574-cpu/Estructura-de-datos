@@ -1,0 +1,156 @@
+//Edgar Emanuel Romero Pérez 
+//Taller 3
+
+//clase Nodo.H
+#pragma once
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Nodo
+{
+public:
+    int id;          
+    string nombre;  
+    Nodo* sig;      
+
+    Nodo(int i, string n);   
+};
+
+
+
+
+//clase Nodo.CPP
+#include "Nodo.h"
+
+// Constructor del nodo
+Nodo::Nodo(int i, string n)
+{
+    id = i;              
+    nombre = n;          
+    sig = nullptr;       
+}
+
+
+
+//clase Pila.h
+#pragma once
+#include "Nodo.h"
+
+class Pila
+{
+private:
+    Nodo* cima;    
+
+public:
+    Pila();               
+    ~Pila();              
+
+    void push(int id, string nombre);  
+    void pop();                       
+    void mostrar();                   
+    bool estaVacia();                  
+};
+
+
+
+//clase Pila.CPP
+#include "Pila.h"
+#include <iostream>
+
+using namespace std;
+
+
+Pila::Pila()
+{
+    cima = nullptr;    
+}
+
+
+Pila::~Pila()
+{
+    while (!estaVacia())
+    {
+        pop();         
+    }
+}
+
+
+bool Pila::estaVacia()
+{
+    return cima == nullptr;
+}
+
+
+void Pila::push(int id, string nombre)
+{
+    Nodo* nuevo = new Nodo(id, nombre); 
+
+    nuevo->sig = cima;  
+
+    cima = nuevo;        
+}
+
+void Pila::pop()
+{
+    if (estaVacia())
+    {
+        cout << "La pila esta vacia." << endl;
+        return;
+    }
+
+    Nodo* temp = cima;  
+
+    cout << "Eliminando: "
+         << temp->id << " - "
+         << temp->nombre << endl;
+
+    cima = cima->sig;    
+
+    delete temp;         
+}
+
+void Pila::mostrar()
+{
+    Nodo* actual = cima;
+
+    cout << "\nContenido de la pila:\n";
+
+    while (actual != nullptr)
+    {
+        cout << "ID: " << actual->id
+             << " Nombre: " << actual->nombre
+             << endl;
+
+        actual = actual->sig;
+    }
+}
+
+
+
+
+
+//main
+#include <iostream>
+#include "Pila.h"
+
+using namespace std;
+
+int main()
+{
+    Pila pila;
+
+    pila.push(1, "António");
+    pila.push(2, "Emanuel");
+    pila.push(3, "Gabriel");
+
+    pila.mostrar();
+
+    cout << "\nEliminando un elemento...\n";
+    pila.pop();
+
+    pila.mostrar();
+
+    return 0;
+}
